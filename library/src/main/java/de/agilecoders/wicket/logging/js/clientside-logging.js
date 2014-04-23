@@ -131,7 +131,6 @@
             if (this.isLoggingActive(lvl)) {
                 var logLevelName = logLevelNames[lvl];
                 var log = {
-                    lvl: logLevelName,
                     stack: stacktrace
                 };
 
@@ -459,8 +458,8 @@
 
         if (defaults.collectClientInfos === true) {
             data.ua = navigator.userAgent;
-            data.winSize = $(win).width() + 'x' + $(win).height();
-            data.screenSize = win.screen.availWidth + 'x' + win.screen.availHeight;
+            data.url = window.location.href;
+            data.winSize = $(win).width() + 'x' + $(win).height() + " screen: " + win.screen.availWidth + 'x' + win.screen.availHeight;
         }
         return data;
     }
