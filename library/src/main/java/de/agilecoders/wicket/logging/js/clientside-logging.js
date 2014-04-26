@@ -517,9 +517,7 @@
     function wrappedWindowOnError(origWindowOnError) {
         return function (message, file, line, pos, exception) {
             noOfWinOnError++;
-            if (exception && exception.stack) {
-                message += " - " + exception.stack
-            }
+                message += " - " + printStackTrace().join(" - ");
 
             if (noOfWinOnError === 1 || defaults.logAdditionalErrors) {
                 WicketClientSideLogging.errorWithoutStack({
