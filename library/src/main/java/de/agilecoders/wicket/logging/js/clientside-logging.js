@@ -515,14 +515,17 @@
      * @returns {Function} wrapped window.onerror handler
      */
     function wrappedWindowOnError(origWindowOnError) {
-        return function (message, file, line) {
+        return function (message, file, line, pos, exception) {
             noOfWinOnError++;
+            if (exception && exception.stack) {
+                message += " - " + exception.stack
+            }
 
             if (noOfWinOnError === 1 || defaults.logAdditionalErrors) {
                 WicketClientSideLogging.errorWithoutStack({
                     message: message,
                     file: file,
-                    line: line
+                    line: line + " pos: " + pos
                 });
             }
 
